@@ -13,7 +13,7 @@ app.use(express.static(publicDirectoryPath));
 app.set('views', viewsPath);
 
 app.get('/', (req, res) => {
-    res.send("Server connection successful")
+    res.render('index');
 })
 
 app.get('/login', (req, res) => {
