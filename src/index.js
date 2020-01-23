@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
+require('./database/database.js');
+const User = require('./database/user');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -27,3 +29,13 @@ app.get('/register', (req, res) => {
 app.listen(PORT, (error, resp) => {
     console.log(`The server is listening at ${PORT}`)
 })
+
+const user = new User({
+    name: "Adarsh Naidu",
+    email: "naidu.adarsh@email.com",
+    password: "thismypass"
+})
+
+user.save().then((user) => {
+    console.log("User inserted into the database", user)
+});
