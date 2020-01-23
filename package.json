@@ -1,0 +1,23 @@
+{
+  "name": "iris_181it102_nodejs",
+  "version": "1.0.0",
+  "description": "Buying and Selling Portal for NITK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdarshNaidu/IRIS_181IT102_NodeJs.git"
+  },
+  "author": "Adarsh Naidu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdarshNaidu/IRIS_181IT102_NodeJs/issues"
+  },
+  "homepage": "https://github.com/AdarshNaidu/IRIS_181IT102_NodeJs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
