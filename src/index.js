@@ -2,9 +2,10 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const passport = require('passport');
-const passportLocalMongoose = require('passport-local-mongoose');
+const userRouter = require('./routes/user')
+// const session = require('express-session');
+// const passport = require('passport');
+// const passportLocalMongoose = require('passport-local-mongoose');
 
 
 const PORT = process.env.PORT || 3000;
@@ -19,15 +20,16 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath));
 app.set('views', viewsPath);
+app.use(userRouter)
 
-app.use(session({
-    secret: "privatekey",
-    resave: false,
-    saveUninitialized: false
-}));
+// app.use(session({
+//     secret: "privatekey",
+//     resave: false,
+//     saveUninitialized: false
+// }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 require('./database/database.js');
 
@@ -53,18 +55,18 @@ app.get('/sell', (req, res) => {
     }
 })
 
-app.post('/users', (req, res) => {
-    User.register({name: req.body.name, email: req.body.email}, req.body.password, (err, user) => {
-        if(err){
-            console.log(err);
-            res.redirect('/register');
-        }else{
-            passport.authenticate('local')(req, res, function(){
-                res.redirect('/sell');
-            })
-        }
-    })
-})
+// app.post('/users', (req, res) => {
+//     User.register({name: req.body.name, email: req.body.email}, req.body.password, (err, user) => {
+//         if(err){
+//             console.log(err);
+//             res.redirect('/register');
+//         }else{
+//             passport.authenticate('local')(req, res, function(){
+//                 res.redirect('/sell');
+//             })
+//         }
+//     })
+// })
 
 app.listen(PORT, (error, resp) => {
     console.log(`The server is listening at ${PORT}`)
