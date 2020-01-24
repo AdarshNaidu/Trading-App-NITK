@@ -45,6 +45,14 @@ app.get('/register', (req, res) => {
     res.render('register');
 })
 
+app.get('/sell', (req, res) => {
+    if(req.isAuthenticated()){
+        res.render('sell');
+    }else{
+        res.redirect('/login');
+    }
+})
+
 app.post('/users', (req, res) => {
     User.register({name: req.body.name, email: req.body.email}, req.body.password, (err, user) => {
         if(err){
@@ -52,7 +60,7 @@ app.post('/users', (req, res) => {
             res.redirect('/register');
         }else{
             passport.authenticate('local')(req, res, function(){
-                res.redirect('/');
+                res.redirect('/sell');
             })
         }
     })
