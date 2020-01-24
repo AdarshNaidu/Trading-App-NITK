@@ -4,3 +4,7 @@ form{
     max-width: 600px;
     margin: 50px auto;
 }
+
+a{
+    margin: 0 10px;
+}

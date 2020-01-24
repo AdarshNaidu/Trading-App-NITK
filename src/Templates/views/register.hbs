@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a href="/" class="center btn btn-primary">Home</a>
+    <a href="/sell" class="btn btn-dark">Sell</a>
+    <a href="/register" class="btn btn-primary">Register</a>
+    <a href="/login" class="center btn btn-dark">Login</a>
+    <a href="/users/logout" class="center btn btn-primary">Logout</a>
+  </nav>
+  
     <form action="/users" method="POST">
     <div class="form-group">
       <label for="name">Name</label>
@@ -22,8 +30,7 @@
       <input type="password" class="form-control" name="password">
     </div>
     <button type="submit" class="btn btn-dark">Register</button>
-    <a href="/login" class="btn btn-dark">Login Page</a>
-    </form>
+  </form>
     
 </body>
 </html>
