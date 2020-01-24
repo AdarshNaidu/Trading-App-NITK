@@ -59,9 +59,9 @@ router.get('/users/logout', (req, res) => {
 })
 
 router.post('/products', (req, res) => {
-    const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id});
-    product.save().then((product) => {
-        res.send(product)
+    const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost});
+    product.save().then(() => {
+        res.redirect('/');
     }).catch((error) => {
         console.log(error)
     })
@@ -70,17 +70,17 @@ router.post('/products', (req, res) => {
 router.get('/products/:id', async (req, res) => {
     if(req.user){
         const product = await Product.findById(req.params.id);
-        // console.log(product);
+        
         res.send("You bought the product");
-        // console.log(req.user);
-        req.user.points -= 500;
+        req.user.points -= product.cost;
         await req.user.save();
         let owner = await User.findById(product.owner.toString());
-        owner.points += 1000;
+        owner.points += product.cost;
         await owner.save();
-        // console.log(owner);
+        await product.remove();
+        res.redirect('/');
     }else{
-        res.redirect('/login');
+        res.send("Login first");
     }
     
 })
