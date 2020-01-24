@@ -29,4 +29,21 @@ router.post('/users', (req, res) => {
     })
 })
 
+router.post('/users/login', (req, res) => {
+    const user = new User({
+        email: req.body.email,
+        password: req.body.password
+    });
+
+    req.login(user, function(err){
+        if(err){
+            console.log(err);
+        }else{
+            passport.authenticate('local')(req, res, function(){
+                res.redirect('/sell');
+            })
+        }
+    })
+})
+
 module.exports = router;
