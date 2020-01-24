@@ -9,9 +9,8 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    description: String,
-    address:{
-        type: String,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     }
 })

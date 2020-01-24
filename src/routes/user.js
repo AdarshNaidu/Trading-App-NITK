@@ -3,6 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const User = require('../database/user')
+const Product = require('../database/product');
 
 const router = express.Router();
 
@@ -15,6 +16,13 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
+router.get('/', async (req, res) => {
+    const products = await Product.find({});
+    console.log(products);
+    res.render('index', {
+        items: products
+    });
+})
 
 router.post('/users', (req, res) => {
     User.register({name: req.body.name, email: req.body.email}, req.body.password, (err, user) => {
@@ -50,5 +58,18 @@ router.get('/users/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 })
+
+router.post('/products', (req, res) => {
+    console.log(req.user);
+    console.log(req.body);
+
+    const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id});
+    product.save().then((product) => {
+        res.send(product)
+    }).catch((error) => {
+        console.log(error)
+    })
+})
+
 
 module.exports = router;
