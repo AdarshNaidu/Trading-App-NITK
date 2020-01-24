@@ -8,3 +8,5 @@ mongoose.connect('mongodb://127.0.0.1/trade',{
 }).catch((error) => {
     console.log("Unable to connect to the database");
 });
+
+mongoose.set("useCreateIndex", true);
