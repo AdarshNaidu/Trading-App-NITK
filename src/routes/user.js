@@ -68,9 +68,21 @@ router.post('/products', (req, res) => {
 })
 
 router.get('/products/:id', async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    console.log(product);
-    res.send("You bought the product");
+    if(req.user){
+        const product = await Product.findById(req.params.id);
+        // console.log(product);
+        res.send("You bought the product");
+        // console.log(req.user);
+        req.user.points -= 500;
+        await req.user.save();
+        let owner = await User.findById(product.owner.toString());
+        owner.points += 1000;
+        await owner.save();
+        // console.log(owner);
+    }else{
+        res.redirect('/login');
+    }
+    
 })
 
 
