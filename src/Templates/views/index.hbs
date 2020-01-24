@@ -21,12 +21,23 @@
         </div>
     </div>
 
-    <div>
+    <div class="products">
         {{#each items}}
-            <p>{{this.name}}</p>
+        <div class="product">
+            <div class="name">
+                {{this.name}}
+            </div>
+            <div class="age">
+                {{this.age}}
+            </div>
+            <button class="center btn btn-primary" data="{{this._id}}" onclick="Buy(event)">
+                Buy
+            </button>
+        </div>
         {{/each}}
     </div>
+
     
-    
+    <script src="./js/index.js"></script>
 </body>
 </html>

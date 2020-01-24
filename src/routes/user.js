@@ -18,7 +18,6 @@ router.use(passport.session());
 
 router.get('/', async (req, res) => {
     const products = await Product.find({});
-    console.log(products);
     res.render('index', {
         items: products
     });
@@ -60,15 +59,18 @@ router.get('/users/logout', (req, res) => {
 })
 
 router.post('/products', (req, res) => {
-    console.log(req.user);
-    console.log(req.body);
-
     const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id});
     product.save().then((product) => {
         res.send(product)
     }).catch((error) => {
         console.log(error)
     })
+})
+
+router.get('/products/:id', async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    console.log(product);
+    res.send("You bought the product");
 })
 
 
