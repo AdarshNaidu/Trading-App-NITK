@@ -17,10 +17,20 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/', async (req, res) => {
-    const products = await Product.find({});
-    res.render('index', {
-        items: products
-    });
+    if(req.user){
+        const products = await Product.find({});
+        res.render('index', {
+            points: req.user.points,
+            items: products
+        });
+    }else{
+        const products = await Product.find({});
+        res.render('index', {
+            points: "login",
+            items: products
+        });
+    }
+    
 })
 
 router.post('/users', (req, res) => {
@@ -30,7 +40,7 @@ router.post('/users', (req, res) => {
             res.redirect('/register');
         }else{
             passport.authenticate('local')(req, res, function(){
-                res.redirect('/sell');
+                res.redirect('/');
             })
         }
     })
@@ -47,7 +57,7 @@ router.post('/users/login', (req, res) => {
             console.log(err);
         }else{
             passport.authenticate('local')(req, res, function(){
-                res.redirect('/sell');
+                res.redirect('/');
             })
         }
     })
@@ -71,14 +81,14 @@ router.get('/products/:id', async (req, res) => {
     if(req.user){
         const product = await Product.findById(req.params.id);
         
-        res.send("You bought the product");
+        // res.send("You bought the product");
         req.user.points -= product.cost;
         await req.user.save();
         let owner = await User.findById(product.owner.toString());
         owner.points += product.cost;
         await owner.save();
         await product.remove();
-        res.redirect('/');
+        res.send(req.user.points.toString());
     }else{
         res.send("Login first");
     }

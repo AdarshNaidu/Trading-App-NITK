@@ -5,4 +5,5 @@ const Buy = async (event) => {
 
     let text = await response.text();
     console.log(text);
+    document.getElementById('points').textContent = text;
 }
