@@ -33,6 +33,17 @@ router.get('/', async (req, res) => {
     
 })
 
+router.get('/admin', async (req, res) => {
+    if(req.user.admin){
+        const users = await  User.find({});
+        res.render('admin', {
+            users: users
+        });
+    }else{
+        res.send("Unauthorised");
+    }
+})
+
 router.post('/users', (req, res) => {
     User.register({name: req.body.name, email: req.body.email}, req.body.password, (err, user) => {
         if(err){

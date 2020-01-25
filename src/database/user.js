@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     points: {
         type: Number,
         default: 5000
+    },
+    admin:{
+        type: Boolean,
+        default: false
     }
 })
 
