@@ -79,31 +79,39 @@ router.get('/users/logout', (req, res) => {
     res.redirect('/');
 })
 
-router.post('/products', (req, res) => {
-    const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost});
-    product.save().then(() => {
-        res.redirect('/');
-    }).catch((error) => {
-        console.log(error)
-    })
-})
+// router.post('/products', (req, res) => {
+//     const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost});
+//     product.save().then(() => {
+//         res.redirect('/');
+//     }).catch((error) => {
+//         console.log(error)
+//     })
+// })
 
-router.get('/products/:id', async (req, res) => {
-    if(req.user){
-        const product = await Product.findById(req.params.id);
+// router.get('/products/:id', async (req, res) => {
+//     if(req.user){
+//         const product = await Product.findById(req.params.id);
         
-        // res.send("You bought the product");
-        req.user.points -= product.cost;
-        await req.user.save();
-        let owner = await User.findById(product.owner.toString());
-        owner.points += product.cost;
-        await owner.save();
-        await product.remove();
-        res.send(req.user.points.toString());
-    }else{
-        res.send("Login first");
-    }
-    
+//         // res.send("You bought the product");
+//         req.user.points -= product.cost;
+//         await req.user.save();
+//         let owner = await User.findById(product.owner.toString());
+//         owner.points += product.cost;
+//         await owner.save();
+//         await product.remove();
+//         res.send(req.user.points.toString());
+//     }else{
+//         res.send("Login first");
+//     }
+// })
+
+router.get('/users/:points/:id', async (req, res) => {
+    console.log(req.params);
+    const user = await User.findById(req.params.id);
+    console.log(user);
+    user.points = req.params.points;
+    await user.save();
+    res.send("Successful update");
 })
 
 

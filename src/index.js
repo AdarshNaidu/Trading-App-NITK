@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/user');
+const productRouter = require('./routes/product');
 
 
 const PORT = process.env.PORT || 3000;
@@ -14,10 +15,12 @@ const app = express();
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath));
 app.set('views', viewsPath);
 app.use(userRouter)
+app.use(productRouter)
 
 
 require('./database/database.js');
