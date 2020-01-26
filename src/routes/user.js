@@ -16,23 +16,6 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', async (req, res) => {
-    if(req.user){
-        const products = await Product.find({});
-        res.render('index', {
-            points: req.user.points,
-            items: products
-        });
-    }else{
-        const products = await Product.find({});
-        res.render('index', {
-            points: "login",
-            items: products
-        });
-    }
-    
-})
-
 router.get('/admin', async (req, res) => {
     if(req.user.admin){
         const users = await  User.find({});
@@ -79,31 +62,6 @@ router.get('/users/logout', (req, res) => {
     res.redirect('/');
 })
 
-// router.post('/products', (req, res) => {
-//     const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost});
-//     product.save().then(() => {
-//         res.redirect('/');
-//     }).catch((error) => {
-//         console.log(error)
-//     })
-// })
-
-// router.get('/products/:id', async (req, res) => {
-//     if(req.user){
-//         const product = await Product.findById(req.params.id);
-        
-//         // res.send("You bought the product");
-//         req.user.points -= product.cost;
-//         await req.user.save();
-//         let owner = await User.findById(product.owner.toString());
-//         owner.points += product.cost;
-//         await owner.save();
-//         await product.remove();
-//         res.send(req.user.points.toString());
-//     }else{
-//         res.send("Login first");
-//     }
-// })
 
 router.get('/users/:points/:id', async (req, res) => {
     console.log(req.params);
@@ -114,5 +72,12 @@ router.get('/users/:points/:id', async (req, res) => {
     res.send("Successful update");
 })
 
+router.get('/users/points', async (req, res) => {
+    if(req.user){
+        res.send(req.user.points.toString());
+    }else{
+        res.status(500).send();
+    }
+})
 
 module.exports = router;

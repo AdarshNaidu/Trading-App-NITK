@@ -14,7 +14,7 @@
         <a href="/register" class="btn btn-primary">Register</a>
         <a href="/login" class="center btn btn-dark">Login</a>
         <a href="/users/logout" class="center btn btn-primary">Logout</a>
-        <a class="center btn btn-warning">Points: <span id="points">{{points}}</span></a>
+        <a class="center btn btn-warning">Points: <span id="points">Login First</span></a>
     </nav>
     <div class="jumbotron">
         <div class="container">
@@ -23,22 +23,7 @@
     </div>
 
     <div class="products">
-        {{#each items}}
-        <div class="product">
-            <div class="name">
-                Name: {{this.name}}
-            </div>
-            <div class="age">
-                Age: {{this.age}}
-            </div>
-            <div class="cost">
-                cost: {{this.cost}}
-            </div>
-            <button class="center btn btn-primary" data="{{this._id}}" onclick="Buy(event)">
-                Buy
-            </button>
-        </div>
-        {{/each}}
+        <h1>Products</h1>
     </div>
 
     

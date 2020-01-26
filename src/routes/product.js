@@ -13,6 +13,11 @@ router.post('/products', (req, res) => {
     })
 })
 
+router.get('/products', async(req, res) => {
+    const products = await Product.find({});
+    res.send(products);
+})
+
 router.get('/products/:id', async (req, res) => {
     if(req.user){
         const product = await Product.findById(req.params.id);        

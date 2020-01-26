@@ -27,9 +27,9 @@ require('./database/database.js');
 
 const User = require('./database/user');
 
-// app.get('/', (req, res) => {
-//     res.render('index');
-// })
+app.get('/', async (req, res) => {
+    res.render('index');
+})
 
 app.get('/login', (req, res) => {
     res.render('login');
@@ -46,7 +46,6 @@ app.get('/sell', (req, res) => {
         res.redirect('/login');
     }
 })
-
 
 app.listen(PORT, (error, resp) => {
     console.log(`The server is listening at ${PORT}`)
