@@ -28,6 +28,10 @@ const transactionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    time : { 
+        type : Date, 
+        default: Date.now 
+    }
 })
 
 const Transaction = mongoose.model('Transaction', transactionSchema);

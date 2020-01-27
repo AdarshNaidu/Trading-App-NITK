@@ -5,5 +5,6 @@ const Update = async (event) => {
     let response = await fetch('http://localhost:3000/users/'+value+'/'+id)
     let result = await response.text();
     alert(result);
+    event.toElement.previousElementSibling.value = "";
     event.toElement.previousElementSibling.previousElementSibling.innerHTML = value;
 }

@@ -52,7 +52,14 @@ displayPoints();
 const Buy = async (event) => {
     let id = event.toElement.attributes.data.value;
     let response = await fetch('http://localhost:3000/products/'+id);
-    let text = await response.text();
-    document.getElementById('points').textContent = text;
-    event.path[1].parentNode.removeChild(event.path[1]);
+    if(response.status == 501){
+        alert("Points Insufficient");
+    }else if(response.status == 401){
+        alert("You are not logged in")
+    }
+    else{
+        let text = await response.text();
+        document.getElementById('points').textContent = text;
+        event.path[1].parentNode.removeChild(event.path[1]);
+    }
 }

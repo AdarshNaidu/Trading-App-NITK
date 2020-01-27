@@ -17,13 +17,17 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/admin', async (req, res) => {
-    if(req.user.admin){
-        const users = await  User.find({});
-        res.render('admin', {
-            users: users
-        });
+    if(req.user){
+        if(req.user.admin){
+            const users = await  User.find({});
+            res.render('admin', {
+                users: users
+            });
+        }else{
+            res.status(404).send();
+        }
     }else{
-        res.send("Unauthorised");
+        res.redirect('/login');
     }
 })
 

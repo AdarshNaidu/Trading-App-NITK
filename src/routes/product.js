@@ -21,20 +21,23 @@ router.get('/products', async(req, res) => {
 
 router.get('/products/:id', async (req, res) => {
     if(req.user){
-        const product = await Product.findById(req.params.id);        
-        req.user.points -= product.cost;
-        await req.user.save();
-        let owner = await User.findById(product.owner.toString());
-        owner.points += product.cost;
-        await owner.save();
-        const transaction = new Transaction({buyer: req.user._id, product: req.params.id});
-        await transaction.save();
-        product.sold = true;
-        product.save();
-        // await product.remove();
-        res.send(req.user.points.toString());
+        const product = await Product.findById(req.params.id);
+        if(req.user.points >= product.cost){    
+            req.user.points -= product.cost;
+            await req.user.save();
+            let owner = await User.findById(product.owner.toString());
+            owner.points += product.cost;
+            await owner.save();
+            const transaction = new Transaction({buyer: req.user._id, product: req.params.id});
+            await transaction.save();
+            product.sold = true;
+            product.save();
+            res.send(req.user.points.toString());
+        }else{
+            res.status(501).send();
+        }
     }else{
-        res.send("Login first");
+        res.status(401).send();
     }
 })
 
