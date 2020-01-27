@@ -16,6 +16,10 @@ const productSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
+    },
+    sold: {
+        type: Boolean,
+        default: false
     }
 })
 

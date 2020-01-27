@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../database/user');
 const Product = require('../database/product');
+const Transaction = require('../database/transaction');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.post('/products', (req, res) => {
 })
 
 router.get('/products', async(req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({sold: false});
     res.send(products);
 })
 
@@ -26,7 +27,11 @@ router.get('/products/:id', async (req, res) => {
         let owner = await User.findById(product.owner.toString());
         owner.points += product.cost;
         await owner.save();
-        await product.remove();
+        const transaction = new Transaction({buyer: req.user._id, product: req.params.id});
+        await transaction.save();
+        product.sold = true;
+        product.save();
+        // await product.remove();
         res.send(req.user.points.toString());
     }else{
         res.send("Login first");
