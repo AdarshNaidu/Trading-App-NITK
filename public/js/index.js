@@ -35,6 +35,38 @@ const displayProducts = async () => {
 
 displayProducts();
 
+const getOrders = async () => {
+    let response = await fetch('http://localhost:3000/users/orders')
+    let orders = await response.json();
+    console.log(orders);
+    return orders;
+}
+
+const createOrderBox = (name, cost, seller) => {
+    const box = document.createElement('div');
+    box.className = "order";
+    const nameElement = document.createElement('div');
+    nameElement.innerText = `Name: ${name}`
+    box.appendChild(nameElement);
+    const costElement = document.createElement('div');
+    costElement.innerText = `Cost: ${cost}`
+    box.appendChild(costElement);
+    const sellerElement = document.createElement('div');
+    sellerElement.innerText = `Seller: ${seller}`
+    box.appendChild(sellerElement);
+    return box;
+}
+
+const displayOrders = async () => {
+    const orders = await getOrders();
+    orders.forEach(element => {
+        const orderBox = createOrderBox(element.itemName, element.cost, element.sellerName)
+        document.querySelector('.orders').appendChild(orderBox);
+    });
+}
+
+displayOrders();
+
 const getProfile = async () => {
     let response = await fetch('http://localhost:3000/users/profile');
     if(response.status == 200){

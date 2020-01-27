@@ -9,15 +9,15 @@ form{
     margin: 0 10px;
 } */
 
-.products{
+.products, .orders{
     max-width: 600px;
     padding: 20px;
-    margin: 0px auto;
+    margin: 20px auto;
     border: 1px solid grey;
     border-radius: 10px;
 }
 
-.product{
+.product, .order{
     margin: 10px;
     padding: 10px;
     border: 1px solid lightgray;

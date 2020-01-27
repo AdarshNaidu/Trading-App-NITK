@@ -30,7 +30,7 @@ router.get('/products/:id', async (req, res) => {
             await req.user.save();
             owner.points += product.cost;
             await owner.save();
-            const transaction = new Transaction({buyer: req.user._id, product: req.params.id});
+            const transaction = new Transaction({buyer: req.user._id, product: req.params.id, itemName: product.name, cost: product.cost, sellerName: owner.name});
             await transaction.save();
             product.sold = true;
             product.save();

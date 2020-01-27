@@ -4,6 +4,7 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const User = require('../database/user')
 const Product = require('../database/product');
+const Transaction = require('../database/transaction');
 
 const router = express.Router();
 
@@ -54,7 +55,10 @@ router.post('/users/login', (req, res) => {
         if(err){
             console.log(err);
         }else{
-            passport.authenticate('local')(req, res, function(){
+            passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/login'
+            })(req, res, function(){
                 res.redirect('/');
             })
         }
@@ -84,6 +88,13 @@ router.get('/users/profile', async (req, res) => {
         res.send({name: req.user.name, points: req.user.points});
     }else{
         res.status(500).send();
+    }
+})
+
+router.get('/users/orders', async (req, res) => {
+    if(req.user){
+        let orders = await Transaction.find({buyer: req.user._id})
+        res.send(orders);
     }
 })
 

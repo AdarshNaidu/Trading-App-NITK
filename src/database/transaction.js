@@ -31,6 +31,15 @@ const transactionSchema = new mongoose.Schema({
     time : { 
         type : Date, 
         default: Date.now 
+    },
+    sellerName: {
+        type: String,
+    },
+    itemName: {
+        type: String,
+    },
+    cost: {
+        type: Number
     }
 })
 
