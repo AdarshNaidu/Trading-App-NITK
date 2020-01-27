@@ -58,7 +58,9 @@ ul {
     background-color: #4CAF50;
   }
 
-  #pointsLi{
+
+
+  .profile{
     display: block;
     color: black;
     text-align: center;
@@ -66,4 +68,8 @@ ul {
     text-decoration: none;
     background-color: orange;
     cursor: pointer;
+  }
+
+  #usernameLi{
+    background-color: #57f542;
   }

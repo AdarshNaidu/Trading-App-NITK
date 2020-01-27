@@ -22,10 +22,12 @@ router.get('/products', async(req, res) => {
 router.get('/products/:id', async (req, res) => {
     if(req.user){
         const product = await Product.findById(req.params.id);
-        if(req.user.points >= product.cost){    
+        let owner = await User.findById(product.owner.toString());
+        if(owner._id.toString() == req.user._id.toString()){
+            res.status(405).send();
+        } else if(req.user.points >= product.cost){    
             req.user.points -= product.cost;
             await req.user.save();
-            let owner = await User.findById(product.owner.toString());
             owner.points += product.cost;
             await owner.save();
             const transaction = new Transaction({buyer: req.user._id, product: req.params.id});

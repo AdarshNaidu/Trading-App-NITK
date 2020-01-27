@@ -24,7 +24,7 @@ router.get('/admin', async (req, res) => {
                 users: users
             });
         }else{
-            res.status(404).send();
+            res.status(401).send();
         }
     }else{
         res.redirect('/login');
@@ -68,17 +68,20 @@ router.get('/users/logout', (req, res) => {
 
 
 router.get('/users/:points/:id', async (req, res) => {
-    console.log(req.params);
-    const user = await User.findById(req.params.id);
-    console.log(user);
-    user.points = req.params.points;
-    await user.save();
-    res.send("Successful update");
+    try{
+        const user = await User.findById(req.params.id);
+        user.points = req.params.points;
+        await user.save();
+        res.send();
+    }catch(error){
+        console.log(error);
+        res.status(500).send();
+    }
 })
 
-router.get('/users/points', async (req, res) => {
+router.get('/users/profile', async (req, res) => {
     if(req.user){
-        res.send(req.user.points.toString());
+        res.send({name: req.user.name, points: req.user.points});
     }else{
         res.status(500).send();
     }

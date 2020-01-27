@@ -35,19 +35,23 @@ const displayProducts = async () => {
 
 displayProducts();
 
-const getPoints = async () => {
-    let response = await fetch('http://localhost:3000/users/points');
+const getProfile = async () => {
+    let response = await fetch('http://localhost:3000/users/profile');
     if(response.status == 200){
-        let points = await response.text();
-        return points;
+        let profile = await response.json();
+        return profile;
     }
 }
 
-const displayPoints = async () => {
-    if(await getPoints()) document.getElementById('points').innerText = await getPoints();
+const displayProfile = async () => {
+    if(await getProfile()){
+        profile = await getProfile();
+        document.getElementById('points').innerText = profile.points;
+        document.getElementById('username').innerText = profile.name;
+    }
 }
 
-displayPoints();
+displayProfile();
 
 const Buy = async (event) => {
     let id = event.toElement.attributes.data.value;
@@ -56,6 +60,8 @@ const Buy = async (event) => {
         alert("Points Insufficient");
     }else if(response.status == 401){
         alert("You are not logged in")
+    }else if(response.status == 405){
+        alert("Hold on!,You are buying your own product");
     }
     else{
         let text = await response.text();
