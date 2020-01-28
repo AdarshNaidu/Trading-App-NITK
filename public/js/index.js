@@ -34,6 +34,10 @@ const createProductBox = (name, age, cost, id, buff) => {
 }
 
 const displayProducts = async () => {
+    let myNode = document.querySelector('.products')
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+    }
     const products = await getProducts();
     products.forEach(element => {
         const productBox = createProductBox(element.name, element.age, element.cost, element._id, element.image.data);
@@ -65,6 +69,10 @@ const createOrderBox = (name, cost, seller) => {
 }
 
 const displayOrders = async () => {
+    let myNode = document.querySelector('.orders')
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+    }
     const orders = await getOrders();
     orders.forEach(element => {
         const orderBox = createOrderBox(element.itemName, element.cost, element.sellerName)
@@ -103,8 +111,8 @@ const Buy = async (event) => {
         alert("Hold on!,You are buying your own product");
     }
     else{
-        let text = await response.text();
-        document.getElementById('points').textContent = text;
-        event.path[1].parentNode.removeChild(event.path[1]);
+        displayProducts();
+        displayProfile();
+        displayOrders();
     }
 }

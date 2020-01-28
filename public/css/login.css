@@ -9,7 +9,7 @@ form{
     margin: 0 10px;
 } */
 
-.products, .orders{
+.list{
     max-width: 600px;
     padding: 20px;
     margin: 20px auto;

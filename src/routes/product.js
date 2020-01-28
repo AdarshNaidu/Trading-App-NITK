@@ -38,7 +38,7 @@ router.get('/products/:id', async (req, res) => {
             await transaction.save();
             product.sold = true;
             product.save();
-            res.send(req.user.points.toString());
+            res.send();
         }else{
             res.status(501).send();
         }
