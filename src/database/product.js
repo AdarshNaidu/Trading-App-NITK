@@ -20,6 +20,9 @@ const productSchema = new mongoose.Schema({
     sold: {
         type: Boolean,
         default: false
+    },
+    image: {
+        type: Buffer
     }
 })
 

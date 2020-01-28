@@ -4,9 +4,17 @@ const getProducts = async () => {
     return products;
 }
 
-const createProductBox = (name, age, cost, id) => {
+const createProductBox = (name, age, cost, id, buff) => {
     const box = document.createElement('div');
     box.className = "product";
+    const imgElement = document.createElement('img');
+    imgElement.style.width = "100px"
+    // buffString = btoa(String.fromCharCode.apply(null, buff)); //This only works for small images
+    buffString = btoa(new Uint8Array(buff).reduce(function (data, byte) {
+        return data + String.fromCharCode(byte);
+    }, ''));
+    imgElement.src = "data:image/jpg;base64,"+buffString;
+    box.appendChild(imgElement)
     const nameElement = document.createElement('div');
     nameElement.innerText = `Name: ${name}`
     box.appendChild(nameElement);
@@ -28,7 +36,7 @@ const createProductBox = (name, age, cost, id) => {
 const displayProducts = async () => {
     const products = await getProducts();
     products.forEach(element => {
-        const productBox = createProductBox(element.name, element.age, element.cost, element._id)
+        const productBox = createProductBox(element.name, element.age, element.cost, element._id, element.image.data);
         document.querySelector('.products').appendChild(productBox);
     });
 }
@@ -38,7 +46,6 @@ displayProducts();
 const getOrders = async () => {
     let response = await fetch('http://localhost:3000/users/orders')
     let orders = await response.json();
-    console.log(orders);
     return orders;
 }
 

@@ -2,11 +2,15 @@ const express = require('express');
 const User = require('../database/user');
 const Product = require('../database/product');
 const Transaction = require('../database/transaction');
+const multer = require('multer');
+
+const upload = multer({
+})
 
 const router = express.Router();
 
-router.post('/products', (req, res) => {
-    const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost});
+router.post('/products', upload.single('image'), (req, res) => {
+    const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost, image: req.file.buffer});
     product.save().then(() => {
         res.redirect('/');
     }).catch((error) => {
