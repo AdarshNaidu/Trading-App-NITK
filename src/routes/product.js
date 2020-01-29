@@ -20,6 +20,9 @@ router.post('/products', upload.single('image'), (req, res) => {
 
 router.get('/products', async(req, res) => {
     const products = await Product.find({sold: false});
+    for(const product of products){
+        await product.populate('owner').execPopulate();
+    }
     res.send(products);
 })
 

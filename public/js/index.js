@@ -4,7 +4,7 @@ const getProducts = async () => {
     return products;
 }
 
-const createProductBox = (name, age, cost, id, buff) => {
+const createProductBox = (name, age, cost, id, buff, contact) => {
     const box = document.createElement('div');
     box.className = "product";
     const imgElement = document.createElement('img');
@@ -30,6 +30,9 @@ const createProductBox = (name, age, cost, id, buff) => {
     button.setAttribute('data', id);
     button.setAttribute('onclick', 'Buy(event)');
     box.appendChild(button);
+    const contactElement = document.createElement('div');
+    contactElement.innerText = `Contact Owner: ${contact}`;
+    box.appendChild(contactElement);
     return box;
 }
 
@@ -40,7 +43,7 @@ const displayProducts = async () => {
     }
     const products = await getProducts();
     products.forEach(element => {
-        const productBox = createProductBox(element.name, element.age, element.cost, element._id, element.image.data);
+        const productBox = createProductBox(element.name, element.age, element.cost, element._id, element.image.data, element.owner.phone);
         document.querySelector('.products').appendChild(productBox);
     });
 }

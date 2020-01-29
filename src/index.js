@@ -54,3 +54,13 @@ app.get('*', (req, res) => {
 app.listen(PORT, (error, resp) => {
     console.log(`The server is listening at ${PORT}`)
 })
+
+// const Product = require('./database/product');
+
+// const main = async () => {
+//     const product = await Product.findById('5e2f3aab40d9a719c456c01d');
+//     await product.populate('owner').execPopulate();
+//     console.log(product);
+// }
+
+// main();
