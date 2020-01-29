@@ -7,6 +7,7 @@ const getProducts = async () => {
 const createProductBox = (name, age, cost, id, buff, contact) => {
     const box = document.createElement('div');
     box.className = "product";
+
     const imgElement = document.createElement('img');
     imgElement.style.width = "100px"
     // buffString = btoa(String.fromCharCode.apply(null, buff)); //This only works for small images
@@ -15,24 +16,21 @@ const createProductBox = (name, age, cost, id, buff, contact) => {
     }, ''));
     imgElement.src = "data:image/jpg;base64,"+buffString;
     box.appendChild(imgElement)
-    const nameElement = document.createElement('div');
-    nameElement.innerText = `Name: ${name}`
-    box.appendChild(nameElement);
-    const ageElement = document.createElement('div');
-    ageElement.innerText = `Age: ${age}`
-    box.appendChild(ageElement);
-    const costElement = document.createElement('div');
-    costElement.innerText = `Cost: ${cost}`
-    box.appendChild(costElement);
+
+    box.appendChild(createInfoElement("Name", name));
+
+    box.appendChild(createInfoElement("Age", age));
+ 
+    box.appendChild(createInfoElement("Cost", cost));
+
     const button = document.createElement('button');
     button.className = "center btn btn-primary";
     button.innerText = "Buy";
     button.setAttribute('data', id);
     button.setAttribute('onclick', 'Buy(event)');
     box.appendChild(button);
-    const contactElement = document.createElement('div');
-    contactElement.innerText = `Contact Owner: ${contact}`;
-    box.appendChild(contactElement);
+
+    box.appendChild(createInfoElement("Contact Owner", contact));
     return box;
 }
 
@@ -59,15 +57,12 @@ const getOrders = async () => {
 const createOrderBox = (name, cost, seller) => {
     const box = document.createElement('div');
     box.className = "order";
-    const nameElement = document.createElement('div');
-    nameElement.innerText = `Name: ${name}`
-    box.appendChild(nameElement);
-    const costElement = document.createElement('div');
-    costElement.innerText = `Cost: ${cost}`
-    box.appendChild(costElement);
-    const sellerElement = document.createElement('div');
-    sellerElement.innerText = `Seller: ${seller}`
-    box.appendChild(sellerElement);
+
+    box.appendChild(createInfoElement("Name", name));
+
+    box.appendChild(createInfoElement("Cost", cost));
+   
+    box.appendChild(createInfoElement("Seller", seller));
     return box;
 }
 
@@ -118,4 +113,10 @@ const Buy = async (event) => {
         displayProfile();
         displayOrders();
     }
+}
+
+const createInfoElement = (Title, value) => {
+    const elem = document.createElement('div');
+    elem.innerText = `${Title}: ${value}`
+    return elem
 }
