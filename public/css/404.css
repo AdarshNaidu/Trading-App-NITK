@@ -1,0 +1,38 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+  
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+  }
+  
+  *:focus {
+    outline: none !important;
+  }
+  
+  body, html {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: #343434;
+    color: white;
+    font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 24px;
+    overflow: hidden;
+    flex-flow: column;
+  }
+  
+
+  .home{
+    background-color: orange;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }

@@ -47,6 +47,10 @@ app.get('/sell', (req, res) => {
     }
 })
 
+app.get('*', (req, res) => {
+    res.render('404');
+})
+
 app.listen(PORT, (error, resp) => {
     console.log(`The server is listening at ${PORT}`)
 })
