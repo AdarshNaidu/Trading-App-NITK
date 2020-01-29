@@ -2,9 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-const User = require('../database/user')
-const Product = require('../database/product');
-const Transaction = require('../database/transaction');
+const User = require('../database/models/user')
+const Product = require('../database/models/product');
+const Transaction = require('../database/models/transaction');
 
 const router = express.Router();
 

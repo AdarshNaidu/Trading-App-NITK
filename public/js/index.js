@@ -50,12 +50,11 @@ displayProducts();
 
 const getTransactions = async () => {
     let response = await fetch('http://localhost:3000/users/orders')
-    let orders = await response.json();
-    console.log(orders);
-    return orders;
+    let transactions = await response.json();
+    return transactions;
 }
 
-const createTransactionBox = (name, cost, seller, contact) => {
+const createTransactionBox = (name, cost, seller, contact, date) => {
     const box = document.createElement('div');
     box.className = "order";
 
@@ -65,6 +64,7 @@ const createTransactionBox = (name, cost, seller, contact) => {
    
     box.appendChild(createInfoElement("Seller", seller));
     box.appendChild(createInfoElement("Contact Owner", contact));
+    box.appendChild(createInfoElement("Bought On", date))
     return box;
 }
 
@@ -75,7 +75,7 @@ const displayTransactions = async () => {
     }
     const orders = await getTransactions();
     orders.forEach(element => {
-        const orderBox = createTransactionBox(element.product.name, element.product.cost, element.product.owner.name, element.product.owner.phone)
+        const orderBox = createTransactionBox(element.product.name, element.product.cost, element.product.owner.name, element.product.owner.phone, element.time.substring(0,10))
         document.querySelector('.orders').appendChild(orderBox);
     });
 }

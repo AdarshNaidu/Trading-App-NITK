@@ -1,7 +1,7 @@
 const express = require('express');
-const User = require('../database/user');
-const Product = require('../database/product');
-const Transaction = require('../database/transaction');
+const User = require('../database/models/user');
+const Product = require('../database/models/product');
+const Transaction = require('../database/models/transaction');
 const multer = require('multer');
 
 const upload = multer({

@@ -25,7 +25,7 @@ app.use(productRouter)
 
 require('./database/database.js');
 
-const User = require('./database/user');
+const User = require('./database/models/user');
 
 app.get('/', async (req, res) => {
     res.render('index');
