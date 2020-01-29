@@ -93,8 +93,12 @@ router.get('/users/profile', async (req, res) => {
 
 router.get('/users/orders', async (req, res) => {
     if(req.user){
-        let orders = await Transaction.find({buyer: req.user._id})
-        res.send(orders);
+        const transactions = await Transaction.find({buyer: req.user._id});
+        for(const transaction of transactions){
+            await transaction.populate('product').execPopulate();
+            await transaction.product.populate('owner').execPopulate();
+        }
+        res.send(transactions);
     }
 })
 

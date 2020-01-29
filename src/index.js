@@ -64,3 +64,17 @@ app.listen(PORT, (error, resp) => {
 // }
 
 // main();
+
+// const Transaction = require('./database/transaction');
+
+// const main = async () => {
+//     const transactions = await Transaction.find({buyer: "5e2edd3f30e6c22a984aab4c"})
+//     for(const transaction of transactions){
+//         await transaction.populate('product').execPopulate();
+//         await transaction.product.populate('owner').execPopulate();
+//         // console.log(transaction);
+//     }
+//     console.log(transactions);
+// }
+
+// main();

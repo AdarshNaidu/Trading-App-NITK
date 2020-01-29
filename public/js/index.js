@@ -48,13 +48,14 @@ const displayProducts = async () => {
 
 displayProducts();
 
-const getOrders = async () => {
+const getTransactions = async () => {
     let response = await fetch('http://localhost:3000/users/orders')
     let orders = await response.json();
+    console.log(orders);
     return orders;
 }
 
-const createOrderBox = (name, cost, seller) => {
+const createTransactionBox = (name, cost, seller, contact) => {
     const box = document.createElement('div');
     box.className = "order";
 
@@ -63,22 +64,23 @@ const createOrderBox = (name, cost, seller) => {
     box.appendChild(createInfoElement("Cost", cost));
    
     box.appendChild(createInfoElement("Seller", seller));
+    box.appendChild(createInfoElement("Contact Owner", contact));
     return box;
 }
 
-const displayOrders = async () => {
+const displayTransactions = async () => {
     let myNode = document.querySelector('.orders')
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
     }
-    const orders = await getOrders();
+    const orders = await getTransactions();
     orders.forEach(element => {
-        const orderBox = createOrderBox(element.itemName, element.cost, element.sellerName)
+        const orderBox = createTransactionBox(element.product.name, element.product.cost, element.product.owner.name, element.product.owner.phone)
         document.querySelector('.orders').appendChild(orderBox);
     });
 }
 
-displayOrders();
+displayTransactions();
 
 const getProfile = async () => {
     let response = await fetch('http://localhost:3000/users/profile');
@@ -111,7 +113,7 @@ const Buy = async (event) => {
     else{
         displayProducts();
         displayProfile();
-        displayOrders();
+        displayTransactions();
     }
 }
 
