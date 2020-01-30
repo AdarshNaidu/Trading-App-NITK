@@ -9,6 +9,7 @@ const productRouter = require('./routes/product');
 const PORT = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, './Templates/views');
+const partialsPath = path.join(__dirname, './Templates/partials');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath));
 app.set('views', viewsPath);
+hbs.registerPartials(partialsPath);
 app.use(userRouter)
 app.use(productRouter)
 

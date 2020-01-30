@@ -9,20 +9,14 @@
 </head>
 <body>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/sell">Sell</a></li>
-        <li><a href="/admin">Admin</a></li>
-        <li class="profile" id ="pointsLi">Points: <span id="points">Login First</span></li>
-        <li class="profile" id ="usernameLi">Logged In As: <span id="username">Login First</span></li>
-        <li style="float:right"><a  href="/register">Register</a></li>
-        <li style="float:right"><a  href="/login">Login</a></li>
-        <li style="float:right"><a  href="/users/logout">Logout</a></li>
-    </ul>
+    {{>navbar}}
+
 
     <div class="jumbotron">
         <div class="container">
             <h1>Buy And Sell</h1>
+                <p class="profile" id ="pointsLi">Points: <span id="points">Login First</span></p>
+                <p class="profile" id ="usernameLi">Logged In As: <span id="username">Login First</span></p>
         </div>
     </div>
 
