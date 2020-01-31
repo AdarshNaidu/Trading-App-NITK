@@ -5,9 +5,9 @@ form{
     margin: 50px auto;
 }
 
-/* a{
-    margin: 0 10px;
-} */
+h1{
+  text-align: center;
+}
 
 .list{
     max-width: 600px;
@@ -31,10 +31,15 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    display: flex;
+  }
+
+  .split{
+    margin-left: auto;
   }
   
   li {
-    float: left;
+    /* float: left; */
   }
   
   li a {
@@ -72,4 +77,23 @@ ul {
 
   #usernameLi{
     background-color: #57f542;
+  }
+
+  .update{
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 600px){
+    form{
+      margin: 20px;
+    }
+    .list{
+      margin: 20px;
+    }
+    ul{
+      flex-flow: column;
+    }
+    .split{
+      margin: unset;
+    }
   }

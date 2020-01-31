@@ -33,7 +33,7 @@ router.get('/admin', async (req, res) => {
 })
 
 router.post('/users', (req, res) => {
-    User.register({name: req.body.name, email: req.body.email}, req.body.password, (err, user) => {
+    User.register({name: req.body.name, email: req.body.email, phone: req.body.phone}, req.body.password, (err, user) => {
         if(err){
             console.log(err);
             res.redirect('/register');

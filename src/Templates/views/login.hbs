@@ -5,23 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
 
 
   {{>navbar}}
 
-  <form action="/users/login" method="POST">
+  <div class="jumbotron">
+        <div class="container">
+            <h1>Login</h1>
+        </div>
+    </div>
+
+  <form name="loginForm" action="/users/login" onsubmit="return isValid(this)" method="POST">
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" name="email">
+      <input type="email" class="form-control" name="email" required>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" name="password">
+      <input type="password" class="form-control" name="password" minlength="6" required>
     </div>
     <button type="submit" class="btn btn-dark">Login</button>
   </form>
+
+  <script src="./js/loginValidator.js"></script>
 </body>
 </html>

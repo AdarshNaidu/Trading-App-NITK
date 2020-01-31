@@ -5,28 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
 
   {{>navbar}}
 
 
-    <form action="/users" method="POST">
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Register</h1>
+        </div>
+    </div>
+
+    <form action="/users" onsubmit="return isValid(this)" method="POST">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" name="name">
+      <input type="text" class="form-control" name="name" required>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" name="email">
+      <input type="email" class="form-control" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" class="form-control" name="phone" required pattern="[789][0-9]{9}">
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" name="password">
+      <input type="password" class="form-control" name="password" minlength="6" required>
     </div>
     <button type="submit" class="btn btn-dark">Register</button>
   </form>
     
+    <script src="./js/registerValidator.js"></script>
 </body>
 </html>

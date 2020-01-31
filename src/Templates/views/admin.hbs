@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin</title>
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
                 Age: {{this.points}}
             </div>
             <input type="text" class="form-control">
-            <button class="btn btn-dark" data="{{this._id}}" onclick="Update(event)">Update</button>
+            <button class="btn btn-dark update" data="{{this._id}}" onclick="Update(event)">Update</button>
             {{!-- <form action="/users" method="GET">
                 <div class="form-group">
                     <label for="points">Update Points</label>
