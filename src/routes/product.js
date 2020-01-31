@@ -15,6 +15,7 @@ router.post('/products', upload.single('image'), (req, res) => {
         res.redirect('/');
     }).catch((error) => {
         console.log(error)
+        res.status(500).send("Cannot register your product")
     })
 })
 

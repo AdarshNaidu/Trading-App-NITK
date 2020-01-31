@@ -18,7 +18,12 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     phone: {
-        type: Number
+        type: Number,
+        validate(value){
+            if(value.toString().length != 10){
+                throw new Error("Phone number must be 10 digits long");
+            }
+        }
     },
     points: {
         type: Number,

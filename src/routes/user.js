@@ -36,7 +36,7 @@ router.post('/users', (req, res) => {
     User.register({name: req.body.name, email: req.body.email, phone: req.body.phone}, req.body.password, (err, user) => {
         if(err){
             console.log(err);
-            res.redirect('/register');
+            res.status(500).send(err.message);
         }else{
             passport.authenticate('local')(req, res, function(){
                 res.redirect('/');
@@ -54,6 +54,7 @@ router.post('/users/login', (req, res) => {
     req.login(user, function(err){
         if(err){
             console.log(err);
+            res.status(500).send(err.message);
         }else{
             passport.authenticate('local', {
                 successRedirect: '/',
