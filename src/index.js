@@ -29,18 +29,26 @@ require('./database/database.js');
 
 const User = require('./database/models/user');
 
+
+//Index Page
 app.get('/', async (req, res) => {
     res.render('index');
 })
 
+
+//Login Page
 app.get('/login', (req, res) => {
     res.render('login');
 })
 
+
+//Registering page
 app.get('/register', (req, res) => {
     res.render('register');
 })
 
+
+//Selling Page
 app.get('/sell', (req, res) => {
     if(req.isAuthenticated()){
         res.render('sell');
@@ -49,6 +57,8 @@ app.get('/sell', (req, res) => {
     }
 })
 
+
+//404 Page
 app.get('*', (req, res) => {
     res.render('404');
 })

@@ -4,11 +4,13 @@ const Product = require('../database/models/product');
 const Transaction = require('../database/models/transaction');
 const multer = require('multer');
 
+//Defining multer function for image upload
 const upload = multer({
 })
 
 const router = express.Router();
 
+//Endpoint to register a product
 router.post('/products', upload.single('image'), (req, res) => {
     const product = new Product({name: req.body.name, age: req.body.age, owner: req.user._id, cost: req.body.cost, image: req.file.buffer});
     product.save().then(() => {
@@ -19,6 +21,7 @@ router.post('/products', upload.single('image'), (req, res) => {
     })
 })
 
+//Endpoint to get all the products
 router.get('/products', async(req, res) => {
     const products = await Product.find({sold: false});
     for(const product of products){
@@ -27,6 +30,7 @@ router.get('/products', async(req, res) => {
     res.send(products);
 })
 
+//Endpoint to buy a product
 router.get('/products/:id', async (req, res) => {
     if(req.user){
         const product = await Product.findById(req.params.id);

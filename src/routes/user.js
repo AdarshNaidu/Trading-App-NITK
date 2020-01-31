@@ -17,6 +17,7 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
+//Endpoint for admin users page
 router.get('/users/admin', async (req, res) => {
     if(req.user){
         if(req.user.admin){
@@ -32,6 +33,8 @@ router.get('/users/admin', async (req, res) => {
     }
 })
 
+
+//Endpoint for registering a new user
 router.post('/users', (req, res) => {
     User.register({name: req.body.name, email: req.body.email, phone: req.body.phone}, req.body.password, (err, user) => {
         if(err){
@@ -45,6 +48,8 @@ router.post('/users', (req, res) => {
     })
 })
 
+
+//Endpoint for logging in users
 router.post('/users/login', (req, res) => {
     const user = new User({
         email: req.body.email,
@@ -66,12 +71,15 @@ router.post('/users/login', (req, res) => {
     })
 })
 
+
+//Endpoint for user logout
 router.get('/users/logout', (req, res) => {
     req.logout();
     res.redirect('/');
 })
 
 
+//Endpoint to update a users points //Note: No admin check being done(bug)
 router.get('/users/:points/:id', async (req, res) => {
     try{
         const user = await User.findById(req.params.id);
@@ -84,6 +92,8 @@ router.get('/users/:points/:id', async (req, res) => {
     }
 })
 
+
+//Endpoint to return all users
 router.get('/users/profile', async (req, res) => {
     if(req.user){
         res.send({name: req.user.name, points: req.user.points});
@@ -92,6 +102,8 @@ router.get('/users/profile', async (req, res) => {
     }
 })
 
+
+//Endpoint to return all orders(transactions)
 router.get('/users/orders', async (req, res) => {
     if(req.user){
         const transactions = await Transaction.find({buyer: req.user._id});
