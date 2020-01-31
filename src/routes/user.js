@@ -17,7 +17,7 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/admin', async (req, res) => {
+router.get('/users/admin', async (req, res) => {
     if(req.user){
         if(req.user.admin){
             const users = await  User.find({});

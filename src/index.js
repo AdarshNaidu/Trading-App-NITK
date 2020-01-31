@@ -56,27 +56,3 @@ app.get('*', (req, res) => {
 app.listen(PORT, (error, resp) => {
     console.log(`The server is listening at ${PORT}`)
 })
-
-// const Product = require('./database/product');
-
-// const main = async () => {
-//     const product = await Product.findById('5e2f3aab40d9a719c456c01d');
-//     await product.populate('owner').execPopulate();
-//     console.log(product);
-// }
-
-// main();
-
-// const Transaction = require('./database/transaction');
-
-// const main = async () => {
-//     const transactions = await Transaction.find({buyer: "5e2edd3f30e6c22a984aab4c"})
-//     for(const transaction of transactions){
-//         await transaction.populate('product').execPopulate();
-//         await transaction.product.populate('owner').execPopulate();
-//         // console.log(transaction);
-//     }
-//     console.log(transactions);
-// }
-
-// main();
