@@ -4,6 +4,7 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const userRouter = require('./routes/user');
 const productRouter = require('./routes/product');
+const Require = require('./database/models/require');
 
 
 const PORT = process.env.PORT || 3000;
@@ -32,7 +33,15 @@ const User = require('./database/models/user');
 
 //Index Page
 app.get('/', async (req, res) => {
-    res.render('index');
+    let required;
+    if(req.user) {required = await Require.find({owner: {$ne: req.user._id}});}
+    else {required = await Require.find({});}
+    for(const require of required){
+        await require.populate('owner').execPopulate();
+    }
+    res.render('index', {
+        required
+    }); 
 })
 
 
@@ -52,6 +61,14 @@ app.get('/register', (req, res) => {
 app.get('/sell', (req, res) => {
     if(req.isAuthenticated()){
         res.render('sell');
+    }else{
+        res.redirect('/login');
+    }
+})
+
+app.get('/require', (req, res) => {
+    if(req.isAuthenticated()){
+        res.render('require');
     }else{
         res.redirect('/login');
     }

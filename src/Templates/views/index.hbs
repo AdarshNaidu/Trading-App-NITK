@@ -28,6 +28,29 @@
     </div>
 
     <div class="list">
+        <h1>Required</h1>
+        <div class="products">
+            {{#each required}}
+            <div class="product">
+                <div class="email">
+                    Name: {{this.name}}
+                </div>
+                <div class="points">
+                    Expected Cost: {{this.cost}}
+                </div>
+                <div class="points">
+                    Request By: {{this.owner.name}}
+                </div>
+                <div class="points">
+                    Contact No.: {{this.owner.phone}}
+                </div>
+
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="list">
         <h1>Your Orders</h1>
         <div class="orders">
             

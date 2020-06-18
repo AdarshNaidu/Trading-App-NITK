@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../database/models/user');
 const Product = require('../database/models/product');
+const Require = require('../database/models/require');
 const Transaction = require('../database/models/transaction');
 const multer = require('multer');
 
@@ -53,6 +54,25 @@ router.get('/products/:id', async (req, res) => {
     }else{
         res.status(401).send();
     }
+})
+
+router.post('/require', (req, res) => {
+    console.log(req.body)
+    const require = new Require({name: req.body.name, owner: req.user._id, cost: req.body.cost});
+    require.save().then(() => {
+        res.redirect('/');
+    }).catch((error) => {
+        console.log(error)
+        res.status(500).send("Cannot register your product")
+    })
+})
+
+router.get('/required', async (req, res) => {
+    const required = await Require.find({});
+    for(const require of required){
+        await require.populate('owner').execPopulate();
+    }
+    res.send(required);
 })
 
 module.exports = router;

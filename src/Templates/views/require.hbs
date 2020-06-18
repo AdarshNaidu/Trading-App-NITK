@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Require</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+
+  {{>navbar}}
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Request Product</h1>
+        </div>
+    </div>
+    
+    <form action="/require" method="POST">
+    <div class="form-group">
+      <label for="name">Name of Product</label>
+      <input type="text" class="form-control" name="name">
+    </div>
+    <div class="form-group">
+      <label for="cost">Expected Price</label>
+      <input type="number" class="form-control" name="cost">
+    </div>
+    <button type="submit" class="btn btn-dark">Request</button>
+    </form>
+</body>
+</html>
